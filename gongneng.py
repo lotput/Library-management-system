@@ -111,13 +111,15 @@ def guashi(sb):
     print()
 
 def chaxun(sb, quanxina=1):
+
     print()
 
 
 def readDictionary(filename):
     dictionary = {}
     file = open(filename, 'r')
-    file.readList()
+    if len(file.readlines):
+        return dictionary
 
     for line in file.readlines():
         line = line.strip()
@@ -136,15 +138,17 @@ def writeDictionary(filename, **dictionary):
 
 
 def readList(filename):
-    book = []
+    list = []
     file = open(filename, "r")
+    if len(file.readlines()) == 0:
+        return list
 
     for line in file.readlines():
         line = line.split()
         b = line
-        book.append(*b)
+        list.append(*b)
         file.close()
-    return book
+    return list
 
 
 def writeList(filename, *list):

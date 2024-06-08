@@ -21,6 +21,9 @@ while True:
     a = int(input(">"))
     if a == 1:
         u = str(input("用户："))
+        if u in userAndPassword:
+            print("已有此用户")
+            continue
         p = str(input("密码："))
         userAndPassword[u] = p
         gongneng.writeDictionary("PasswordAndUser.ss", **userAndPassword)
@@ -43,7 +46,7 @@ while True:
                     if sp.__eq__(teacher) or sp.__eq__(administrator):
                         p2 = str(input("新密码："))
                         userAndPassword[u] = p2
-                        gongneng.writeDictionary("PasswordAndUser",**userAndPassword)
+                        gongneng.writeDictionary("PasswordAndUser.ss",**userAndPassword)
                         print("成功")
                         break
                     else:
