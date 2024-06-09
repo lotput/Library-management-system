@@ -1,1 +1,0 @@
-lotput as

@@ -43,6 +43,7 @@ while True:
         a = 0
     elif a == 4:
         print("查询")
+        chaxun(u,1)
         a = 0
     else:
         print("输入1-4！")
