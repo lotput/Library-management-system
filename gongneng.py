@@ -118,21 +118,20 @@ def chaxun(sb, quanxina=1):
 def readDictionary(filename):
     dictionary = {}
     file = open(filename, 'r')
-
     
-    cannot=len(file.readlines())==0
-    if cannot:
+    linesInFile=file.readlines()
+    
+    if  len(linesInFile)== 0:
         return {}
+    else:
+        for line in linesInFile:
+            line = line.strip()
+            k, v = line.split(' ')
+            dictionary[k] = v 
     
-    
-
-    for line in file.readlines():
-        line = line.strip()
-        k = line.split(' ')[0]
-        v = line.split(' ')[1]
-        dictionary[k] = v
     file.close()
     return dictionary
+
 
 
 def writeDictionary(filename, **dictionary):
@@ -145,15 +144,15 @@ def writeDictionary(filename, **dictionary):
 def readList(filename):
     list = []
     file = open(filename, "r")
-    cannot=len(file.readlines()) == 0
-    if cannot:
+    linesInFile=file.readlines()
+    
+    if len(linesInFile) == 0:
         return []
 
-    for line in file.readlines():
+    for line in linesInFile:
         line = line.split()
-        b = line
-        list.append(*b)
-        file.close()
+        list.append(*line)
+    file.close()
     return list
 
 
