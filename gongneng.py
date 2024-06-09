@@ -68,12 +68,12 @@ def guihuan(sb):
 
 
 def guashi(sb):
-    book=readList("books.book")
-    jieyue=readList("jieyue.book")
-    read=readDictionary("jieyue.ss")
+    #book=readList("books.book")
+    jieyuebook=readList("jieyue.book")
+    jieyue=readDictionary("jieyue.ss")
     guashibook=readList("guashi.book")
     guashi=readDictionary("guashi.ss")
-    if not (sb in read):
+    if not (sb in jieyue):
 
        print("你没有借阅任何书籍")
     else:
@@ -82,24 +82,24 @@ def guashi(sb):
 
         while True:
             a = str(input("挂失的书名（无需加书名号）"))
-            if not (a in jieyue):
+            if not (a in jieyuebook):
                 print("没有此书，请检查书名")
                 continue
             else:
                 break
-        del read[sb]
-        for i in range(len(jieyue)):
-            if a.__eq__(jieyue[i]):
-                del jieyue[i]
+        del jieyue[sb]
+        for i in range(len(jieyuebook)):
+            if a.__eq__(jieyuebook[i]):
+                del jieyuebook[i]
                 break
         guashibook.append(a)
         guashi[sb]=a
         print("成功，加紧寻找，或理赔，然后取消挂失，在挂失过程中，不能借阅书籍")
-        writeDictionary("guaishi.ss",guashi)
-        writeList("guashi.book",guashibook)
+        writeDictionary("guaishi.ss",**guashi)
+        writeList("guashi.book",*guashibook)
 
-        writeDictionary("jieyue.ss",read)
-        writeList("jieyue.book",readList)
+        writeDictionary("jieyue.ss",**jieyue)
+        writeList("jieyue.book",*jieyuebook)
 
 
 
