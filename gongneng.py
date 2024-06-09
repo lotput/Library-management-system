@@ -120,19 +120,19 @@ def readDictionary(filename):
     file = open(filename, 'r')
 
     
-    a=len(file.readlines())==0
-    if a:
+    cannot=len(file.readlines())==0
+    if cannot:
         return {}
-    else:
+    
     
 
-       for line in file.readlines():
-           line = line.strip()
-           k = line.split(' ')[0]
-           v = line.split(' ')[1]
-           dictionary[k] = v
-           file.close()
-       return dictionary
+    for line in file.readlines():
+        line = line.strip()
+        k = line.split(' ')[0]
+        v = line.split(' ')[1]
+        dictionary[k] = v
+    file.close()
+    return dictionary
 
 
 def writeDictionary(filename, **dictionary):
@@ -145,7 +145,8 @@ def writeDictionary(filename, **dictionary):
 def readList(filename):
     list = []
     file = open(filename, "r")
-    if len(file.readlines()) == 0:
+    cannot=len(file.readlines()) == 0
+    if cannot:
         return []
 
     for line in file.readlines():
