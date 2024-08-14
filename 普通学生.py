@@ -1,5 +1,3 @@
-import copy
-
 from gongneng import *
 
 print("图书角管理系统 \nV1.0 (学生)")
@@ -23,10 +21,9 @@ while True:
     else:
         print("无此用户")
         continue
-print("借阅【1】 归还【2】 挂失【3】 查询【4】")
-
+writelog(u+"登录")
 while True:
-    a = int(input(">"))
+    a = int(input("借阅【1】 归还【2】 挂失【3】取消挂失【4】 查询【5】其他退出>"))
 
     if a == 1:
         print("借阅")
@@ -42,10 +39,13 @@ while True:
         guashi(u)
         a = 0
     elif a == 4:
+        print("取消挂失")
+        quxiaoguashi(u)
+        a = 0
+        
+    elif a == 5:
         print("查询")
-        chaxun(u,1)
-        a = 0
+        chaxun(u, 1)
+
     else:
-        print("输入1-4！")
-        a = 0
-        continue
+        exit(0)

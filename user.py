@@ -2,11 +2,10 @@ import copy
 
 import gongneng
 
-print("图书角管理系统 \nV1.0 (账户) \n注册【1】 密码修改【2】")
+print("图书角管理系统 \nV1.0 (账户)")
 
 userAndPassword = copy.deepcopy(gongneng.readDictionary("PasswordAndUser.ss"))
-administrator = " "
-teacher = " "
+
 file = open("administrator.pp")
 administrator = file.read()
 file.close()
@@ -15,10 +14,8 @@ file = open("teacher.pp")
 teacher = file.read()
 file.close()
 
-
-
 while True:
-    a = int(input(">"))
+    a = int(input("注册【1】 密码修改【2】>"))
     if a == 1:
         u = str(input("用户："))
         if u in userAndPassword:
