@@ -1,6 +1,10 @@
+#TODO 代码逻辑整体优化
+#TODO 日志记录功能
+
 import copy
 
 import gongneng
+
 
 print("图书角管理系统 \nV1.0 (账户)")
 

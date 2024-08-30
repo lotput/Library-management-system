@@ -1,6 +1,7 @@
 import copy
-import datetime
-time = datetime.datetime.now()
+import time
+
+
 
 
 def jieyue(sb):
@@ -66,6 +67,7 @@ def guihuan(sb):
                 break
             elif a_t1.__eq__(""):
                 writelog(sb + "管理员或老师密码验证失败")
+                writelog(sb + "归还书籍失败")
                 return 0
             else:
                 print("密码错误，请重试！！")
@@ -117,17 +119,17 @@ def guashi(sb):
                     break
             guashibook.append(a)
             guashi[sb] = a
-            print("成功，加紧寻找，或理赔，然后取消挂失，在挂失过程中，不能借阅书籍")
+            print("成功，加紧寻找，或理赔，然后取消挂失，在挂失期间，不能借阅书籍")
             writeDictionary("guashi.ss", **guashi)
             writeList("guashi.book", *guashibook)
-
             writeDictionary("jieyue.ss", **jieyue)
             writeList("jieyue.book", *jieyuebook)
-            writelog(sb+"挂失了")
+            writelog(sb+"挂失了"+"《"+a+"》")
 
 
 
 def quxiaoguashi(sb):
+    #TODO 日志记录功能
     guash = copy.deepcopy(readDictionary("guashi.ss"))
     guashibook = copy.deepcopy(readList("guashi.book"))
     file = open("administrator.pp")
@@ -187,6 +189,7 @@ def quxiaoguashi(sb):
 
 
 def chaxun(sb, quanxian=1):
+    #TODO 日志记录功能
     userandpassword = readDictionary("PasswordAndUser.ss")
 
     jieyue = copy.deepcopy(readDictionary("jieyue.ss"))
@@ -228,6 +231,7 @@ def chaxun(sb, quanxian=1):
 
 
 def xiugaiSuji(leixing):
+    #TODO 日志记录功能
     book = copy.deepcopy(readList("books.book"))
     if leixing == 1:
         print("你必须确认此书不在挂失或借阅序列中，否则会出现不可预估的后果")
@@ -304,6 +308,10 @@ def writeList(filename, *list):
         file.write(str(i) + "\n")
 
 def writelog(neirong):
+
+    # localtime = time.localtime(time.time())
+    #localtime = time.strftime("%Y-%m-%d %H:%M:%S", localtime)
     file = open("log.log","a")
-    file.write("["+str(time.year)+"/"+str(time.month)+"/"+str(time.day)+"/"+str(time.hour)+"/"+str(time.minute)+"/"+str(time.second)+"]"+neirong+"\n")
+    
+    file.write("["+str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time())))+"]"+neirong+"\n")
     file.close()

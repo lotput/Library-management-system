@@ -1,0 +1,1 @@
+lotput a
