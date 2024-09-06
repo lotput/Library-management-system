@@ -130,7 +130,7 @@ def guashi(sb):
 
 def quxiaoguashi(sb):
     #TODO 日志记录功能
-    writelog(sb+取消尝试挂失书籍)
+    writelog(sb+"取消尝试挂失书籍")
     guash = copy.deepcopy(readDictionary("guashi.ss"))
     guashibook = copy.deepcopy(readList("guashi.book"))
     file = open("administrator.pp")
@@ -143,9 +143,11 @@ def quxiaoguashi(sb):
 
     leixing = int(input("找到后(购买相同书后)取消挂失【1】 理赔后取消挂失【2】输入其他数离开 >"))
     if leixing == 1:
-        writelong(sb+"选择了类型1")
+        writelog(sb+"选择了类型1")
 
         a = str(input("取消挂失的书名（无需加书名号）"))
+        if not (a in guashibook):
+            print("没有此书，请检查书名")
         i=0
         while True:
             i=i+1
@@ -153,29 +155,34 @@ def quxiaoguashi(sb):
             a_t1 = str(input("验证管理员或老师密码(回车退出)："))
             if a_t1.__eq__(admin) or a_t1.__eq__(teacher):
                 break
-            if a_ti.__eq__(""):
+            elif a_t1.__eq__(""):
                 writelog(sb + "管理员或老师密码验证失败")
                 writelog(sb + "归还书籍失败")
                 
             else:
-                writelong() 
+                writelog("第"+i+"次管理员密码验证失败")
                 print("密码错误，请重试！！")
         a = ""
-        if not (a in guashibook):
-            print("没有此书，请检查书名")
 
-        else:
-            del guash[sb]
-            for i in range(len(guashibook) - 1):
-                if a.__eq__(guashibook[i]):
-                    del guashibook[i]
+
+
+        del guash[sb]
+        for i in range(len(guashibook) - 1):
+            if a.__eq__(guashibook[i]):
+                del guashibook[i]
             writeDictionary("guashi.ss", **guash)
             writeList("guashi.book", *guash)
             print("成功！！")
 
 
     elif leixing == 2:
-        writelong(sb+"选择了类型2")
+        writelog(sb+"选择了类型2")
+        a = ""
+
+
+        a = str(input("取消挂失的书名（无需加书名号）"))
+        if not (a in guashibook):
+            print("没有此书，请检查书名")
         while True:
 
             a_t1 = str(input("验证管理员或老师密码："))
@@ -183,17 +190,13 @@ def quxiaoguashi(sb):
                 break
             else:
                 print("密码错误，请重试！！")
-        a = ""
 
 
-        a = str(input("取消挂失的书名（无需加书名号）"))
-        if not (a in guashibook):
-            print("没有此书，请检查书名")
-        else:
-            del guash[sb]
 
-            writeDictionary("guashi.ss", **guash)
-            print("成功")
+        del guash[sb]
+
+        writeDictionary("guashi.ss", **guash)
+        print("成功")
 
 
 
