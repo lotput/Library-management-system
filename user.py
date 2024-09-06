@@ -20,6 +20,7 @@ file.close()
 
 while True:
     a = int(input("注册【1】 密码修改【2】>"))
+
     if a == 1:
         u = str(input("用户："))
         if u in userAndPassword:

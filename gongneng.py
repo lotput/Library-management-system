@@ -262,6 +262,7 @@ def xiugaiSuji(leixing):
         a = ""
 
         a = str(input("要删除的的书籍(无需加书名号)"))
+        writelog("老师或管理员尝试删除书籍")
 
         if a in book:
             for i in range(len(book) - 1):
@@ -269,19 +270,25 @@ def xiugaiSuji(leixing):
                    del book[i]
                    writeList("books.book", *book)
                    print("成功")
+                   writelog("老师或管理员删除书籍失败")
                    break
                 else:
                    print("没有此书,请检查书名")
+                   writelog("老师或管理员删除了《"+"》")
                    continue
     elif leixing == 2:
+        writelog("老师或管理员尝试添加书籍")
 
         a = str(input("要添加的的书籍(无需加书名号)"))
+
 
         if not (a in book):
             book.append(a)
             writeList("books.book", *book)
+            writelog("老师或管理员添加了《"+a+"》")
         else:
             print("已经存在书籍")
+            writelog("老师或管理员添加书籍失败")
 
 
 def readDictionary(filename):
