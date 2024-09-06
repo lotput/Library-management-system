@@ -129,7 +129,7 @@ def guashi(sb):
 
 
 def quxiaoguashi(sb):
-    #TODO 日志记录功能
+
     writelog(sb+"取消尝试挂失书籍")
     guash = copy.deepcopy(readDictionary("guashi.ss"))
     guashibook = copy.deepcopy(readList("guashi.book"))
@@ -157,10 +157,10 @@ def quxiaoguashi(sb):
                 break
             elif a_t1.__eq__(""):
                 writelog(sb + "管理员或老师密码验证失败")
-                writelog(sb + "归还书籍失败")
+                writelog(sb + "取消挂失书籍失败")
                 
             else:
-                writelog("第"+i+"次管理员密码验证失败")
+                writelog("第"+str(i)+"次老师管理员或老师密码尝试错误")
                 print("密码错误，请重试！！")
         a = ""
 
@@ -172,7 +172,8 @@ def quxiaoguashi(sb):
                 del guashibook[i]
             writeDictionary("guashi.ss", **guash)
             writeList("guashi.book", *guash)
-            print("成功！！")
+            print("成功")
+            writelog(sb + "取消挂失了(类型1)" + "《" + a + "》")
 
 
     elif leixing == 2:
@@ -184,11 +185,17 @@ def quxiaoguashi(sb):
         if not (a in guashibook):
             print("没有此书，请检查书名")
         while True:
+            i = i + 1
 
-            a_t1 = str(input("验证管理员或老师密码："))
+            a_t1 = str(input("验证管理员或老师密码(回车退出)："))
             if a_t1.__eq__(admin) or a_t1.__eq__(teacher):
                 break
+            elif a_t1.__eq__(""):
+                writelog(sb + "管理员或老师密码验证失败")
+                writelog(sb + "取消挂失书籍失败")
+
             else:
+                writelog("第" + str(i) + "次老师管理员或老师密码尝试错误")
                 print("密码错误，请重试！！")
 
 
@@ -197,12 +204,13 @@ def quxiaoguashi(sb):
 
         writeDictionary("guashi.ss", **guash)
         print("成功")
+        writelog(sb + "取消挂失了(类型2)" + "《" + a + "》")
 
 
 
 
 def chaxun(sb, quanxian=1):
-    #TODO 日志记录功能
+
     userandpassword = readDictionary("PasswordAndUser.ss")
 
     jieyue = copy.deepcopy(readDictionary("jieyue.ss"))
@@ -211,10 +219,11 @@ def chaxun(sb, quanxian=1):
     guashibook = copy.deepcopy(readList("guashi.book"))
     book = copy.deepcopy(readList("books.book"))
     if quanxian == 1:
-
+        writelog(sb + "查询了书籍")
         print(sb + ": 目前的借阅 " + (jieyue[sb] if sb in jieyue else "无"), end=" ")
         print("目前的挂失 " + (guashi[sb] if sb in guashi else "无"))
     elif quanxian == 2 and ("teacher".__eq__(sb) or "admin".__eq__(sb)):
+        writelog(sb+"以管理员或老师权限查询了书籍")
         print("总览")
         print("所有书籍：")
         for i in book:
@@ -238,9 +247,11 @@ def chaxun(sb, quanxian=1):
         print("目前的挂失 " + (guashi[chaxunSb] + "\t" if chaxunSb in guashi else "无\t"))
 
     elif quanxian == 2 and not ("teacher".__eq__(sb) or "admin".__eq__(sb)):
+        writelog(sb + "以管理员或老师权限查询了书籍")
         print(sb + "\t:目前的借阅 " + (jieyue[sb] if sb in jieyue else "无"), end=" ")
         print("目前的挂失 " + (guashi[sb] if sb in guashi else "无"))
         print("此用户权限来源不当，拒绝访问其他用户的信息")
+        writelog(sb + "越权，其他用户信息访问被驳回")
 
 
 def xiugaiSuji(leixing):
